@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Confirmed — InviteGlow</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '982295814662600');
+  fbq('track', 'PageView');
+  // Reads price from URL: ?p=49, ?p=79, or ?p=129
+  const price = new URLSearchParams(window.location.search).get('p') || '79';
+  fbq('track', 'Purchase', {value: parseFloat(price), currency: 'USD'});
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=982295814662600&ev=Purchase&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    :root {
+      --gold: #c9a84c; --gold-light: #f0d080;
+      --navy: #0d1b2a; --cream: #fdf8f2;
+      --white: #ffffff; --text: #2c2c2c; --gray: #6b7280;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; color:var(--text); background:var(--navy); min-height:100vh; }
+
+    /* ── HEADER ── */
+    header {
+      text-align:center; padding:2rem 5% 0;
+      font-family:'Playfair Display',serif; color:var(--gold); font-size:1.5rem; letter-spacing:.02em;
+    }
+    header span { color:var(--white); }
+
+    /* ── HERO CONFIRM ── */
+    .confirm-hero {
+      text-align:center; padding:3rem 5% 2rem; position:relative;
+    }
+    .confirm-hero::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,.15) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .checkmark {
+      width:80px; height:80px; border-radius:50%;
+      background:linear-gradient(135deg,#25D366,#1aad52);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 1.5rem; font-size:2.2rem;
+      box-shadow:0 8px 32px rgba(37,211,102,.4);
+      animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+    .confirm-hero h1 {
+      font-family:'Playfair Display',serif; color:var(--white);
+      font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:.6rem; position:relative;
+    }
+    .confirm-hero h1 em { color:var(--gold); font-style:italic; }
+    .confirm-hero p { color:rgba(255,255,255,.6); font-size:1rem; max-width:520px; margin:0 auto 2rem; position:relative; }
+
+    /* ── STEPS ── */
+    .steps-strip {
+      display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;
+      padding:0 5% 3rem; position:relative;
+    }
+    .step-pill {
+      background:rgba(255,255,255,.05); border:1px solid rgba(201,168,76,.25);
+      border-radius:16px; padding:1rem 1.4rem; text-align:center; flex:1; min-width:160px; max-width:200px;
+    }
+    .step-pill .sp-num { color:var(--gold); font-weight:700; font-size:.8rem; letter-spacing:.1em; margin-bottom:.3rem; }
+    .step-pill p { color:rgba(255,255,255,.7); font-size:.83rem; line-height:1.5; }
+
+    /* ── FORM CARD ── */
+    .form-section {
+      background:var(--cream); padding:3.5rem 5%;
+    }
+    .form-card {
+      max-width:700px; margin:0 auto;
+    }
+    .form-label-top { color:var(--gold); font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.5rem; }
+    .form-card h2 { font-family:'Playfair Display',serif; color:var(--navy); font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:.5rem; }
+    .form-card > p { color:var(--gray); font-size:.92rem; margin-bottom:2rem; line-height:1.6; }
+
+    .field-group { margin-bottom:1.2rem; }
+    .field-group label { display:block; font-size:.83rem; font-weight:600; color:var(--navy); margin-bottom:.4rem; }
+    .field-group input, .field-group select, .field-group textarea {
+      width:100%; padding:.85rem 1rem; border:1.5px solid #e2d9ce;
+      border-radius:12px; font-size:.93rem; font-family:'Inter',sans-serif;
+      background:white; color:var(--text); outline:none; transition:border .2s;
+    }
+    .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color:var(--gold); }
+    .field-group textarea { resize:vertical; min-height:100px; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media(max-width:600px){ .field-row{grid-template-columns:1fr;} }
+
+    /* ── FEATURES CHECK ── */
+    .fc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:.6rem; margin-top:.5rem; }
+    .fc-item {
+      display:flex; align-items:center; gap:.6rem;
+      background:white; border:1.5px solid #e2d9ce; border-radius:10px; padding:.7rem .9rem; cursor:pointer;
+      transition:border .2s, background .2s;
+    }
+    .fc-item:has(input:checked) { border-color:var(--gold); background:#fdf6e8; }
+    .fc-item input { accent-color:var(--gold); width:16px; height:16px; cursor:pointer; }
+    .fc-item label { font-size:.83rem; color:var(--text); cursor:pointer; }
+
+    /* ── SUBMIT ── */
+    .btn-submit {
+      width:100%; background:linear-gradient(135deg,var(--gold),#a07830);
+      color:var(--navy); border:none; padding:1.1rem; border-radius:50px;
+      font-weight:700; font-size:1.05rem; cursor:pointer; margin-top:1.5rem;
+      transition:transform .2s, box-shadow .2s;
+      box-shadow:0 4px 20px rgba(201,168,76,.35);
+    }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(201,168,76,.5); }
+
+    /* ── OR DIVIDER ── */
+    .or-divider { display:flex; align-items:center; gap:1rem; margin:1.8rem 0; }
+    .or-divider::before,.or-divider::after { content:''; flex:1; height:1px; background:#e2d9ce; }
+    .or-divider span { color:var(--gray); font-size:.85rem; white-space:nowrap; }
+
+    /* ── WHATSAPP OPTION ── */
+    .wa-option {
+      background:linear-gradient(135deg,#0d1b2a,#1a3050);
+      border-radius:20px; padding:1.8rem; text-align:center;
+    }
+    .wa-option h3 { color:var(--white); font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:.4rem; }
+    .wa-option p { color:rgba(255,255,255,.55); font-size:.85rem; margin-bottom:1.2rem; line-height:1.5; }
+    .btn-wa {
+      display:inline-flex; align-items:center; gap:.7rem;
+      background:#25D366; color:white; text-decoration:none;
+      padding:.9rem 2rem; border-radius:50px; font-weight:700; font-size:.95rem;
+      transition:transform .2s, box-shadow .2s;
+      box-shadow:0 4px 20px rgba(37,211,102,.35);
+    }
+    .btn-wa:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,.5); }
+    .btn-wa svg { width:22px; height:22px; fill:white; }
+
+    /* ── THANK YOU STATE ── */
+    .thankyou-state { display:none; text-align:center; padding:3rem 1rem; }
+    .thankyou-state .ty-emoji { font-size:4rem; display:block; margin-bottom:1rem; }
+    .thankyou-state h3 { font-family:'Playfair Display',serif; color:var(--navy); font-size:1.8rem; margin-bottom:.8rem; }
+    .thankyou-state p { color:var(--gray); line-height:1.7; max-width:440px; margin:0 auto; }
+
+    /* ── FOOTER ── */
+    footer { text-align:center; padding:2rem; color:rgba(255,255,255,.3); font-size:.78rem; }
+    footer a { color:var(--gold); text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<header>Invite<span>Glow</span></header>
+
+<!-- HERO CONFIRMATION -->
+<div class="confirm-hero">
+  <div class="checkmark">✓</div>
+  <h1>Payment Confirmed! <br><em>Let's Build Your Invite.</em></h1>
+  <p>Your order is in. Fill out the quick form below so we can start designing — we'll have your invite ready within 48 hours.</p>
+</div>
+
+<!-- NEXT STEPS -->
+<div class="steps-strip">
+  <div class="step-pill">
+    <div class="sp-num">STEP 1 — DONE</div>
+    <p>Payment confirmed ✓</p>
+  </div>
+  <div class="step-pill">
+    <div class="sp-num">STEP 2 — YOU'RE HERE</div>
+    <p>Tell us your event details</p>
+  </div>
+  <div class="step-pill">
+    <div class="sp-num">STEP 3 — 48 HRS</div>
+    <p>We design & send your invite link</p>
+  </div>
+</div>
+
+<!-- INTAKE FORM -->
+<div class="form-section">
+  <div class="form-card">
+
+    <div id="formState">
+      <div class="form-label-top">Your Invite Details</div>
+      <h2>Tell Us About Your Event</h2>
+      <p>The more you share, the better we can personalize your invite. Takes about 2 minutes.</p>
+
+      <!-- Event basics -->
+      <div class="field-row">
+        <div class="field-group">
+          <label>Your Name</label>
+          <input id="s_name" type="text" placeholder="First & Last Name" />
+        </div>
+        <div class="field-group">
+          <label>Phone / WhatsApp</label>
+          <input id="s_phone" type="tel" placeholder="+1 (910) 000-0000" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Email Address</label>
+        <input id="s_email" type="email" placeholder="you@email.com" />
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Type of Event</label>
+          <select id="s_type">
+            <option value="">Select one</option>
+            <option>Wedding</option>
+            <option>Quinceañera</option>
+            <option>Sweet 16</option>
+            <option>Baby Shower</option>
+            <option>Birthday</option>
+            <option>Graduation</option>
+            <option>Anniversary</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Honoree / Event Name</label>
+          <input id="s_eventname" type="text" placeholder="e.g. Sofia's Quinceañera" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Event Date</label>
+          <input id="s_date" type="date" />
+        </div>
+        <div class="field-group">
+          <label>Event Time</label>
+          <input id="s_time" type="time" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Venue Name & City</label>
+          <input id="s_venue" type="text" placeholder="e.g. The Grand Ballroom, Miami FL" />
+        </div>
+        <div class="field-group">
+          <label>Expected Guests</label>
+          <select id="s_guests">
+            <option value="">Select range</option>
+            <option>Under 50</option>
+            <option>50 – 100</option>
+            <option>100 – 200</option>
+            <option>200+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Color Theme / Vibe</label>
+        <input id="s_vibe" type="text" placeholder="e.g. Blush & Gold, Royal Purple, Boho Garden, Tropical..." />
+      </div>
+
+      <!-- Features -->
+      <div class="field-group" style="margin-top:1.2rem;">
+        <label>Features You Want Included</label>
+        <div class="fc-grid">
+          <div class="fc-item"><input type="checkbox" id="fc1" /><label for="fc1">⏱ Countdown Timer</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc2" /><label for="fc2">✉️ RSVP Form</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc3" /><label for="fc3">📸 Photo Gallery</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc4" /><label for="fc4">🎵 Music Player</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc5" /><label for="fc5">📍 Venue Map</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc6" /><label for="fc6">🎁 Gift Registry</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc7" /><label for="fc7">📖 Our Story / Bio</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc8" /><label for="fc8">👗 Dress Code</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc9" /><label for="fc9">🛏 Hotel Info</label></div>
+          <div class="fc-item"><input type="checkbox" id="fc10" /><label for="fc10">🌐 Spanish + English</label></div>
+        </div>
+      </div>
+
+      <!-- Inspiration & notes -->
+      <div class="field-group" style="margin-top:1.2rem;">
+        <label>Inspiration / Style Notes (optional)</label>
+        <textarea id="s_inspo" placeholder="Share any Pinterest links, colors, photos, or ideas you love. The more detail the better!"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label>Anything else we should know?</label>
+        <textarea id="s_notes" placeholder="Special requests, deadline, language preference, specific songs..." style="min-height:80px;"></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="submitIntake()">Send My Event Details →</button>
+
+      <!-- OR WhatsApp -->
+      <div class="or-divider"><span>OR prefer to text / WhatsApp us instead?</span></div>
+      <div class="wa-option">
+        <h3>📱 Send Your Details on WhatsApp</h3>
+        <p>Tap below and send us a voice note, photos, or just type your event details. We'll handle the rest.</p>
+        <a class="btn-wa" id="waLink" href="https://wa.me/19107217902?text=Hi%20InviteGlow!%20I%20just%20purchased%20a%20package.%20Here%20are%20my%20event%20details%3A%0A%0AName%3A%0AEvent%20Type%3A%0AEvent%20Date%3A%0AVenue%3A%0AColor%20Theme%3A%0AFeatures%20Wanted%3A%0AExtra%20Notes%3A" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Text Us on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Thank you state -->
+    <div class="thankyou-state" id="thankYouState">
+      <span class="ty-emoji">🎉</span>
+      <h3>We Got Your Details!</h3>
+      <p>We'll start designing your invite right away and send you a preview link within <strong>48 hours</strong>. Watch your WhatsApp and email — we'll be in touch soon!<br><br>
+      <strong style="color:var(--gold);">Questions? Text us anytime: (910) 721-7902</strong></p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="https://shaiansolutions.com">← Back to InviteGlow</a> &nbsp;·&nbsp; hello@shaiansolutions.com &nbsp;·&nbsp; (910) 721-7902
+</footer>
+
+<script>
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpLu5YWj-8vtkRjccObqR7RTkdL1qZh8rHEwOqeOsRs9OlW7UTV1TzI8FZQZGYtCuR/exec';
+
+  // Show package name in heading from URL param
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const pkg = params.get('p');
+    const pkgMap = { '49': 'Starter Package', '79': 'Standard Package', '129': 'Premium Package' };
+    if (pkg && pkgMap[pkg]) {
+      const em = document.querySelector('.confirm-hero h1 em');
+      if (em) em.textContent = pkgMap[pkg] + ' — Let\'s Build Your Invite.';
+    }
+  })();
+
+  // Submit intake form
+  async function submitIntake() {
+    const name  = document.getElementById('s_name').value.trim();
+    const phone = document.getElementById('s_phone').value.trim();
+    const email = document.getElementById('s_email').value.trim();
+
+    if (!name || (!phone && !email)) {
+      alert('Please enter your name and at least a phone number or email so we can reach you.');
+      return;
+    }
+
+    // Collect features
+    const featureLabels = [];
+    for (let i = 1; i <= 10; i++) {
+      const cb = document.getElementById('fc' + i);
+      if (cb && cb.checked) featureLabels.push(cb.nextElementSibling.textContent.trim());
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const pkg = params.get('p') || '?';
+
+    const payload = {
+      'Event Type':        document.getElementById('s_type').value     || '—',
+      'Event Name':        document.getElementById('s_eventname').value || '—',
+      'Contact Name':      name,
+      'Email':             email || '—',
+      'Phone/WhatsApp':    phone || '—',
+      'Event Date':        document.getElementById('s_date').value     || '—',
+      'Event Time':        document.getElementById('s_time').value     || '—',
+      'Guest Count':       document.getElementById('s_guests').value   || '—',
+      'Venue':             document.getElementById('s_venue').value    || '—',
+      'Color/Vibe':        document.getElementById('s_vibe').value     || '—',
+      'Features Wanted':   featureLabels.join(', ') || '—',
+      'How They Found Us': 'PAID CUSTOMER — Package $' + pkg,
+      'Extra Notes':       (document.getElementById('s_inspo').value + ' | ' + document.getElementById('s_notes').value).trim() || '—',
+      'Language':          'en'
+    };
+
+    try {
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch(e) {}
+
+    // Also fire Meta Pixel Lead event
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { content_name: 'Intake Form Submitted' });
+    }
+
+    document.getElementById('formState').style.display = 'none';
+    document.getElementById('thankYouState').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<!-- Meta Pixel — Lead tracking on form submit -->
+<script>
+  document.querySelector('.btn-submit').addEventListener('click', function() {
+    if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+  });
+</script>
+</body>
+</html>
